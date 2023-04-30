@@ -9,7 +9,7 @@ export default function index() {
           className="bg-gradient-to-r from-blue-800/30 to-sky-800/30 backdrop-blur-[2px]"
           type="4xl"
         >
-          <div className="flex h-screen max-w-xl items-center">
+          <div className="flex h-[100svh] max-w-xl items-center">
             <div className="space-y-6">
               {/* <h1 className="text-6xl font-bold text-white">
                 Ma-ATHAG nga serbisyo para sa padayon nga pag-UgwAd kang
@@ -57,7 +57,7 @@ export default function index() {
           <h2 className="text-5xl font-bold">The Student Leaders</h2>
           <div>
             <h3 className="text-2xl font-medium">National Officers</h3>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid auto-cols-max grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <Card
                 name="Ferdian Vince F. Diana"
                 position="President"
