@@ -129,10 +129,10 @@ export default function index() {
 
       <Platform className="bg-gradient-to-br from-blue-800 to-sky-800 py-16">
         <div>
-          <h2 className="text-center text-5xl font-bold text-white">
+          <h2 className="text-center text-3xl font-bold text-white lg:text-5xl">
             Vote wisely, Vote UgwAd Party.
           </h2>
-          <p className="text-center text-2xl font-medium text-white">
+          <p className="text-center text-lg font-medium text-white lg:text-2xl">
             May 17 is the big day where you and the rest of the University of
             Antique students can cast your vote and select the next leaders of
             the Student Government.
