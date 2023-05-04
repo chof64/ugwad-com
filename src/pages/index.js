@@ -1,9 +1,34 @@
 import Platform from "@/components/Platform";
 import Card from "@/components/profile/Card";
+import directus from "@/lib/directus";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function index() {
+export const getStaticProps = async () => {
+  const { data: profiles } = await directus.items("profiles").readByQuery({
+    limit: -1,
+    fields: ["id", "name", "position", "portrait"],
+    filter: {
+      _and: [
+        {
+          _or: [
+            { position: { _eq: "President" } },
+            { position: { _eq: "Vice President" } },
+            { position: { _eq: "Senator" } },
+          ],
+        },
+        { category: { _eq: "national" } },
+      ],
+    },
+  });
+
+  return {
+    props: { profiles },
+    revalidate: 10,
+  };
+};
+
+export default function index({ profiles }) {
   return (
     <>
       <Platform className="py-16">
@@ -64,28 +89,41 @@ export default function index() {
           </section>
           <section className="space-y-6">
             <h2 className="text-3xl font-bold lg:text-5xl">Our Values</h2>
-            <div className="space-y-4 text-neutral-800">
+            <div className="space-y-2 text-neutral-800">
               <p className="text-lg font-medium">
                 ATHAG guides every member of UgwAd Party. It is the core values
                 that every member live and follow.
               </p>
-              <div className="space-y-2 text-xl">
+              <div className="space-y-1 text-xl">
                 <p>
-                  <span className="font-semibold underline">A</span>
+                  <span className="text-2xl font-semibold text-blue-600">
+                    A
+                  </span>
                   ccountability
                 </p>
                 <p>
-                  <span className="font-semibold underline">T</span>ransparency
+                  <span className="text-2xl font-semibold text-blue-600">
+                    T
+                  </span>
+                  ransparency
                 </p>
                 <p>
-                  <span className="font-semibold underline">H</span>umility
+                  <span className="text-2xl font-semibold text-blue-600">
+                    H
+                  </span>
+                  umility
                 </p>
                 <p>
-                  <span className="font-semibold underline">A</span>ccessibility
+                  <span className="text-2xl font-semibold text-blue-600">
+                    A
+                  </span>
+                  ccessibility
                 </p>
                 <p>
-                  <span className="font-semibold underline">G</span>ood
-                  Governance
+                  <span className="text-2xl font-semibold text-blue-600">
+                    G
+                  </span>
+                  ood Governance
                 </p>
               </div>
             </div>
@@ -99,22 +137,14 @@ export default function index() {
             The Student Leaders
           </h2>
           <div className="grid auto-cols-max grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            <Card
-              name="Ferdian Vince F. Diana"
-              position="President"
-              image="/profile/diana-president.jpg"
-            />
-            <Card
-              name="Melchy Leong-on Orquejo"
-              position="Vice President"
-              image="/profile/orquejo-vice.jpg"
-            />
-            <Card name="Shee Jane Alvior" position="Senator" />
-            <Card name="Alexandrou Estaris Bensa" position="Senator" />
-            <Card name="Jirah Jane Cabrillos" position="Senator" />
-            <Card name="Janine Sante Chicano" position="Senator" />
-            <Card name={`Carlyle "Cing" De La Llave`} position="Senator" />
-            <Card name="Queenie Fortunado" position="Senator" />
+            {profiles.map((profile) => (
+              <Card
+                key={profile.id}
+                name={profile.name}
+                position={profile.position}
+                image={profile.portrait}
+              />
+            ))}
           </div>
           <div>
             <Link
@@ -128,7 +158,7 @@ export default function index() {
       </Platform>
 
       <Platform className="bg-gradient-to-br from-blue-800 to-sky-800 py-16">
-        <div>
+        <div className="space-y-6">
           <h2 className="text-center text-3xl font-bold text-white lg:text-5xl">
             Vote wisely, Vote UgwAd Party.
           </h2>
