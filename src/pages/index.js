@@ -1,4 +1,5 @@
 import Platform from "@/components/Platform";
+import Layout from "@/components/layout/Layout";
 import Card from "@/components/profile/Card";
 import directus from "@/lib/directus";
 import Image from "next/image";
@@ -7,7 +8,6 @@ import Link from "next/link";
 export const getStaticProps = async () => {
   const { data: profiles } = await directus.items("profiles").readByQuery({
     limit: -1,
-    fields: ["id", "name", "position", "portrait"],
     filter: {
       _and: [
         {
@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
 export default function index({ profiles }) {
   return (
     <>
-      <Platform className="py-16">
+      <Platform className="bg-gradient-to-b from-gray-100 via-gray-100 to-transparent py-16">
         <div className="grid grid-rows-2 gap-6 md:grid-cols-2 md:grid-rows-none">
           <div className="my-auto space-y-12">
             <div className="space-y-6">
@@ -60,7 +60,7 @@ export default function index({ profiles }) {
             </div>
           </div>
           <div>
-            <div className="relative flex h-96 w-full items-center justify-center overflow-clip rounded-2xl p-10 shadow-xl">
+            <div className="relative flex h-96 w-full items-center justify-center overflow-clip rounded-2xl p-10 shadow-2xl">
               <Image
                 className="object-cover object-center"
                 src="/ugwad-hero.png"
@@ -143,6 +143,7 @@ export default function index({ profiles }) {
                 name={profile.name}
                 position={profile.position}
                 image={profile.portrait}
+                profile={`/profiles/${profile.slug}`}
               />
             ))}
           </div>
@@ -172,3 +173,7 @@ export default function index({ profiles }) {
     </>
   );
 }
+
+index.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
