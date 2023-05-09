@@ -1,3 +1,4 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,8 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import directus from "@/lib/directus";
+import { CheckSquareIcon } from "lucide-react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export const getStaticProps = async () => {
   const { data: profiles } = await directus.items("profiles").readByQuery({
@@ -103,25 +106,88 @@ export default function Home({ profiles }) {
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
             The Student Leaders
           </h2>
-          <div className="mt-4 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
+          <div className="my-6 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
             {profiles.map((profile) => (
-              <Card key={profile.id}>
-                <CardHeader>
-                  <CardTitle>Card Title</CardTitle>
-                  <CardDescription>Card Description</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Card Content</p>
-                </CardContent>
-                <CardFooter>
-                  <p>Card Footer</p>
-                </CardFooter>
-              </Card>
+              <Link
+                className="group"
+                href={`/profiles/${profile.slug}`}
+                key={profile.id}
+              >
+                <Card className="transition-all duration-500 delay-75 ease-in-out group-hover:bg-gray-100">
+                  <CardHeader>
+                    <CardTitle>{profile.name}</CardTitle>
+                    <CardDescription className="font-medium">
+                      {profile.position}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="relative aspect-[3/4] w-full rounded-xl bg-[url('/card-cover.png')] bg-cover bg-center">
+                      <Image
+                        className="h-full w-full rounded-xl object-cover object-top backdrop-blur-sm"
+                        src={
+                          `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile.portrait}` ||
+                          "/ugwad-logo.jpg"
+                        }
+                        alt={`Profile image of ${profile.name}`}
+                        fill
+                      />
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <p className="text-sm text-muted-foreground transition-all duration-500 delay-75 ease-in-out group-hover:font-semibold group-hover:text-blue-600 group-hover:after:content-['__-->']">
+                      View profile
+                    </p>
+                  </CardFooter>
+                </Card>
+              </Link>
             ))}
+          </div>
+          <Button variant="outline">View more profiles</Button>
+        </div>
+      </section>
+
+      <section className="my-32">
+        <div className="mx-auto w-svw-95 max-w-7xl">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+            The 2023 Election
+          </h2>
+          <div className="mt-6 flex w-full flex-1 flex-col gap-6 md:flex-row">
+            <div className="basis-1/2">
+              <Alert>
+                <CheckSquareIcon className="h-4 w-4 stroke-blue-700" />
+                <AlertTitle>Vote UgwAd!</AlertTitle>
+                <AlertDescription>
+                  This upcoming 2023 UASG National, Provincial and FLP
+                  Sub-Chapter Officers Election, please vote for UgwAd Party!
+                </AlertDescription>
+              </Alert>
+              <p className="leading-7 [&:not(:first-child)]:mt-6">
+                The Commission of Elections of the University of Antique - Main
+                Campus has set a date for the 2023 UASG National, Provincial,
+                and FLP Sub-Chapter Officers Election. This election allows the
+                students to vote for their chosen candidates who will serve as
+                their voice in the student government.
+              </p>
+              <p className="leading-7 [&:not(:first-child)]:mt-6">
+                May 17, 2023, is the big day when you and your fellow students
+                can vote and select the new officers to be your voice in the
+                University. So don&apos;t forget to add a reminder, set an
+                alarm, and tell your friends to vote. Vote wisely.
+              </p>
+            </div>
+            <div className="h-full w-full basis-1/2">
+              <div className="relative m-auto aspect-square w-full max-w-sm">
+                <Image
+                  className="rounded-xl object-cover object-center"
+                  src="/comelec-election.jpg"
+                  alt="Comelec Schedule of Election"
+                  fill
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <pre>{JSON.stringify(profiles, null, 2)}</pre>
     </>
   );
 }
