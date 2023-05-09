@@ -16,7 +16,7 @@ import Link from "next/link";
 
 export const getStaticProps = async () => {
   const { data: profiles } = await directus.items("profiles").readByQuery({
-    limit: -1,
+    limit: 8,
     filter: {
       _and: [
         {
@@ -27,6 +27,7 @@ export const getStaticProps = async () => {
           ],
         },
         { category: { _eq: "national" } },
+        { status: { _eq: "published" } },
       ],
     },
   });
