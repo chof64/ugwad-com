@@ -1,4 +1,3 @@
-import { Accordion } from "@/components/ui/accordion";
 import directus from "@/lib/directus";
 import Image from "next/image";
 
@@ -62,64 +61,62 @@ export default function Profile({ profile }) {
         </div>
       </section>
       <section className="my-16">
-        <div className="m-auto w-svw-95 max-w-lg">
-          <Accordion type="single" defaultValue="platforms" collapsible>
-            {profile[0].biography && (
-              <>
-                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                  Biography
-                </h2>
-                <div
-                  className="prose prose-blue"
-                  dangerouslySetInnerHTML={{ __html: profile[0].biography }}
-                />
-              </>
-            )}
-            {profile[0].education && (
-              <>
-                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                  Educational Background
-                </h2>
-                <div
-                  className="prose prose-blue"
-                  dangerouslySetInnerHTML={{ __html: profile[0].education }}
-                />
-              </>
-            )}
-            {profile[0].leadership && (
-              <>
-                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                  Leadership Background
-                </h2>
-                <div
-                  className="prose prose-blue"
-                  dangerouslySetInnerHTML={{ __html: profile[0].leadership }}
-                />
-              </>
-            )}
-            {profile[0].achievements && (
-              <>
-                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                  Achievements
-                </h2>
-                <div
-                  className="prose prose-blue"
-                  dangerouslySetInnerHTML={{ __html: profile[0].achievements }}
-                />
-              </>
-            )}
-            {profile[0].platform && (
-              <>
-                <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                  Platform
-                </h2>
-                <div
-                  className="prose prose-blue"
-                  dangerouslySetInnerHTML={{ __html: profile[0].platform }}
-                />
-              </>
-            )}
-          </Accordion>
+        <div className="m-auto w-svw-95 max-w-lg space-y-12">
+          {profile[0].biography && (
+            <div>
+              <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                Biography
+              </h2>
+              <div
+                className="prose prose-blue"
+                dangerouslySetInnerHTML={{ __html: profile[0].biography }}
+              />
+            </div>
+          )}
+          {profile[0].education && (
+            <div>
+              <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                Educational Background
+              </h2>
+              <div
+                className="prose prose-blue"
+                dangerouslySetInnerHTML={{ __html: profile[0].education }}
+              />
+            </div>
+          )}
+          {profile[0].leadership && (
+            <div>
+              <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                Leadership Background
+              </h2>
+              <div
+                className="prose prose-blue"
+                dangerouslySetInnerHTML={{ __html: profile[0].leadership }}
+              />
+            </div>
+          )}
+          {profile[0].achievements && (
+            <div>
+              <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                Achievements
+              </h2>
+              <div
+                className="prose prose-blue"
+                dangerouslySetInnerHTML={{ __html: profile[0].achievements }}
+              />
+            </div>
+          )}
+          {profile[0].platform && (
+            <div>
+              <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                Platform
+              </h2>
+              <div
+                className="prose prose-blue"
+                dangerouslySetInnerHTML={{ __html: profile[0].platform }}
+              />
+            </div>
+          )}
         </div>
       </section>
     </>
