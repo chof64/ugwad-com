@@ -1,3 +1,4 @@
+import Layout from "@/components/layout/Layout";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import directus from "@/lib/directus";
 import { CheckSquareIcon } from "lucide-react";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -192,3 +192,7 @@ export default function Home({ profiles }) {
     </>
   );
 }
+
+Home.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

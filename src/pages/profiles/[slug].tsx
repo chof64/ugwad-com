@@ -1,3 +1,4 @@
+import Layout from "@/components/layout/Layout";
 import directus from "@/lib/directus";
 import Image from "next/image";
 
@@ -122,3 +123,7 @@ export default function Profile({ profile }) {
     </>
   );
 }
+
+Profile.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
