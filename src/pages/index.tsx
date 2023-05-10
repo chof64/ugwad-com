@@ -1,14 +1,7 @@
 import Layout from "@/components/layout/Layout";
+import ProfileCard from "@/components/profile/Card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import directus from "@/lib/directus";
 import { CheckSquareIcon } from "lucide-react";
 import Image from "next/image";
@@ -17,16 +10,16 @@ import Link from "next/link";
 export const getStaticProps = async () => {
   const { data: profiles } = await directus.items("profiles").readByQuery({
     limit: 8,
+    fields: ["name", "position", "department", "portrait", "slug"],
     filter: {
       _and: [
         {
           _or: [
-            { position: { _eq: "President" } },
-            { position: { _eq: "Vice President" } },
-            { position: { _eq: "Senator" } },
+            { position: { _eq: "president" } },
+            { position: { _eq: "vice_president" } },
+            { position: { _eq: "senator" } },
           ],
         },
-        { category: { _eq: "national" } },
         { status: { _eq: "published" } },
       ],
     },
@@ -34,7 +27,7 @@ export const getStaticProps = async () => {
 
   return {
     props: { profiles },
-    revalidate: 10,
+    revalidate: 30,
   };
 };
 
@@ -53,8 +46,12 @@ export default function Home({ profiles }) {
               progressive change, inclusion and equality.
             </div>
             <div className="inline-block space-x-2">
-              <Button className="bg-blue-800 font-bold">Vote UgwAd</Button>
-              <Button variant="secondary">View Profiles</Button>
+              <Button className="bg-blue-800 font-bold" asChild>
+                <Link href="/#schedule">Vote UgwAd</Link>
+              </Button>
+              <Button variant="secondary" asChild>
+                <Link href="/profiles">View Profiles</Link>
+              </Button>
             </div>
           </div>
           <div className="relative h-96 w-full rounded-xl bg-muted shadow-md">
@@ -70,8 +67,8 @@ export default function Home({ profiles }) {
       </section>
 
       <section className="my-32">
-        <div className="m-auto flex w-svw-95 max-w-7xl flex-1 flex-col gap-6 md:flex-row">
-          <div>
+        <div className="m-auto flex w-svw-95 max-w-7xl flex-col gap-6 md:flex-row">
+          <div className="md:w-1/2">
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
               Our Philosophy
             </h2>
@@ -83,7 +80,7 @@ export default function Home({ profiles }) {
               students.
             </p>
           </div>
-          <div>
+          <div className="md:w-1/2">
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
               Our Values
             </h2>
@@ -107,47 +104,16 @@ export default function Home({ profiles }) {
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
             The Student Leaders
           </h2>
-          <div className="my-6 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
+          <div className="my-6 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
             {profiles.map((profile) => (
-              <Link
-                className="group"
-                href={`/profiles/${profile.slug}`}
-                key={profile.id}
-              >
-                <Card className="transition-all duration-500 delay-75 ease-in-out group-hover:bg-gray-100">
-                  <CardHeader>
-                    <CardTitle>{profile.name}</CardTitle>
-                    <CardDescription className="font-medium">
-                      {profile.position}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="relative aspect-[3/4] w-full rounded-xl bg-[url('/card-cover.png')] bg-cover bg-center">
-                      <Image
-                        className="h-full w-full rounded-xl object-cover object-top backdrop-blur-sm"
-                        src={
-                          `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile.portrait}` ||
-                          "/ugwad-logo.jpg"
-                        }
-                        alt={`Profile image of ${profile.name}`}
-                        fill
-                      />
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <p className="text-sm text-muted-foreground transition-all duration-500 delay-75 ease-in-out group-hover:font-semibold group-hover:text-blue-600 group-hover:after:content-['__-->']">
-                      View profile
-                    </p>
-                  </CardFooter>
-                </Card>
-              </Link>
+              <ProfileCard profile={profile} key={profile.name} />
             ))}
           </div>
           <Button variant="outline">View more profiles</Button>
         </div>
       </section>
 
-      <section className="my-32">
+      <section className="my-32" id="schedule">
         <div className="mx-auto w-svw-95 max-w-7xl">
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
             The 2023 Election
