@@ -22,17 +22,14 @@ export default function Navigation() {
               <NavigationMenuList>
                 {mainNavigation.primary.map((item) => (
                   <NavigationMenuItem key={item.title}>
-                    <Link
-                      href={item.href}
-                      passHref
-                      target={item.external ? "_blank" : ""}
-                      rel={item.external ? "noreferrer noopener" : ""}
-                    >
+                    <Link href={item.href} legacyBehavior passHref>
                       <NavigationMenuLink
                         className={cn(
                           navigationMenuTriggerStyle(),
                           item.external ? "after:content-['_↗']" : ""
                         )}
+                        target={item.external ? "_blank" : ""}
+                        rel={item.external ? "noreferrer noopener" : ""}
                       >
                         {item.title}
                       </NavigationMenuLink>
