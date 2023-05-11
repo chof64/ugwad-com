@@ -77,7 +77,7 @@ export default function LayoutHead({ data }) {
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicons//favicon-32x32.png"
+        href="/favicons/favicon-32x32.png"
       />
       <link
         rel="icon"
