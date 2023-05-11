@@ -15,7 +15,7 @@ export default function ProfileCard({ profile }) {
           src={
             profile.portrait
               ? `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile.portrait}`
-              : "/ugwad-logo.jpg"
+              : "/ugwad-transparent.png"
           }
           alt={`Portrait of ${profile.name}`}
           fill

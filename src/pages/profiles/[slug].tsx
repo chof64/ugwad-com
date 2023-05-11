@@ -41,7 +41,7 @@ export default function Profile({ profile }) {
               className="h-full w-full rounded-xl object-cover object-top backdrop-blur-sm"
               src={
                 `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile[0].portrait}` ||
-                "/ugwad-logo.jpg"
+                "/ugwad-transparent.png"
               }
               alt={`Profile image of ${profile[0].name}`}
               fill
