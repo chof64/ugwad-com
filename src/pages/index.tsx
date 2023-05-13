@@ -109,7 +109,7 @@ export default function Home({ profiles }) {
               <ProfileCard profile={profile} key={profile.name} />
             ))}
           </div>
-          <Button variant="outline">View more profiles</Button>
+          <Button variant="outline" asChild><Link href="/profiles">View more profiles</Link></Button>
         </div>
       </section>
 
