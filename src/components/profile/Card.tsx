@@ -17,7 +17,7 @@ export default function ProfileCard({ profile }) {
               ? `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile.portrait}`
               : "/ugwad-transparent.png"
           }
-          alt={`Portrait of ${profile.name}`}
+          alt={`Portrait of ${profile.Name}`}
           fill
         />
         <Image
@@ -29,7 +29,7 @@ export default function ProfileCard({ profile }) {
       </div>
       <div className="mt-2">
         <div className="text-center text-lg font-semibold transition duration-500 delay-75 ease-in-out group-hover:text-blue-800">
-          {profile.name}
+          {profile.Name}
         </div>
         <div className="text-center text-sm text-muted-foreground transition duration-500 delay-75 ease-in-out group-hover:text-blue-600">
           <PositionTitle

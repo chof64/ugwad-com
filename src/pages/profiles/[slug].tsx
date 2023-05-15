@@ -1,4 +1,5 @@
 import Layout from "@/components/layout/Layout";
+import PositionTitle from "@/components/profile/PositionTitle";
 import directus from "@/lib/directus";
 import Image from "next/image";
 
@@ -26,7 +27,7 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { slug, profile },
+    props: { profile },
     revalidate: 10,
   };
 };
@@ -43,17 +44,20 @@ export default function Profile({ profile }) {
                 `https://${process.env.NEXT_PUBLIC_DIRECTUS_DOMAIN}/assets/${profile[0].portrait}` ||
                 "/ugwad-transparent.png"
               }
-              alt={`Profile image of ${profile[0].name}`}
+              alt={`Profile image of ${profile[0].Name}`}
               fill
               priority
             />
           </div>
           <div className="my-auto h-full md:basis-1/2">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-              {profile[0].name}
+              {profile[0].Name}
             </h1>
             <div className="mt-2 text-xl text-muted-foreground">
-              {profile[0].position}
+              <PositionTitle
+                position={profile[0].position}
+                department={profile[0].department}
+              />
             </div>
             <div className="mt-6 max-w-lg leading-7 [&:not(:first-child)]:mt-6">
               {profile[0].sub_header}
