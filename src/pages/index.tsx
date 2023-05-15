@@ -10,7 +10,7 @@ import Link from "next/link";
 export const getStaticProps = async () => {
   const { data: profiles } = await directus.items("profiles").readByQuery({
     limit: 8,
-    fields: ["name", "position", "department", "portrait", "slug"],
+    fields: ["Name", "position", "department", "portrait", "slug"],
     filter: {
       _and: [
         {
@@ -109,7 +109,9 @@ export default function Home({ profiles }) {
               <ProfileCard profile={profile} key={profile.name} />
             ))}
           </div>
-          <Button variant="outline" asChild><Link href="/profiles">View more profiles</Link></Button>
+          <Button variant="outline" asChild>
+            <Link href="/profiles">View more profiles</Link>
+          </Button>
         </div>
       </section>
 

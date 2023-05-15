@@ -6,7 +6,7 @@ import { sortProfiles } from "@/lib/sort-profiles";
 export const getStaticProps = async () => {
   const { data } = await directus.items("profiles").readByQuery({
     limit: 8,
-    fields: ["name", "position", "department", "portrait", "slug"],
+    fields: ["Name", "position", "department", "portrait", "slug"],
     filter: {
       _and: [{ status: { _eq: "published" } }],
     },
