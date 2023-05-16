@@ -3,12 +3,13 @@ import ProfileCard from "@/components/profile/Card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import directus from "@/lib/directus";
+import { sortProfiles } from "@/lib/sort-profiles";
 import { CheckSquareIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
-  const { data: profiles } = await directus.items("profiles").readByQuery({
+  const { data } = await directus.items("profiles").readByQuery({
     limit: 8,
     fields: ["Name", "position", "department", "portrait", "slug"],
     filter: {
@@ -24,6 +25,8 @@ export const getStaticProps = async () => {
       ],
     },
   });
+
+  const profiles = sortProfiles(data);
 
   return {
     props: { profiles },
@@ -106,7 +109,7 @@ export default function Home({ profiles }) {
           </h2>
           <div className="my-6 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
             {profiles.map((profile) => (
-              <ProfileCard profile={profile} key={profile.name} />
+              <ProfileCard profile={profile} key={profile.Name} />
             ))}
           </div>
           <Button variant="outline" asChild>
