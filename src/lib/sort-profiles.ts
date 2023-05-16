@@ -9,7 +9,7 @@ export const sortProfiles = (profiles) => {
     });
 
     items.sort((a, b) => {
-      return a.name.localeCompare(b.name);
+      return a.Name.localeCompare(b.Name);
     });
 
     // @ts-ignore
@@ -27,7 +27,7 @@ export const sortProfiles = (profiles) => {
       });
 
       dept.sort((a, b) => {
-        return a.name.localeCompare(b.name);
+        return a.Name.localeCompare(b.Name);
       });
 
       // @ts-ignore
@@ -45,7 +45,7 @@ export const sortProfiles = (profiles) => {
       });
 
       items.sort((a, b) => {
-        return a.name.localeCompare(b.name);
+        return a.Name.localeCompare(b.Name);
       });
 
       // @ts-ignore
