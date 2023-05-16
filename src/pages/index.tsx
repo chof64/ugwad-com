@@ -106,7 +106,7 @@ export default function Home({ profiles }) {
           </h2>
           <div className="my-6 grid auto-cols-auto auto-rows-auto grid-rows-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
             {profiles.map((profile) => (
-              <ProfileCard profile={profile} key={profile.name} />
+              <ProfileCard profile={profile} key={profile.Name} />
             ))}
           </div>
           <Button variant="outline" asChild>

@@ -4,11 +4,7 @@ import Link from "next/link";
 
 export default function ProfileCard({ profile }) {
   return (
-    <Link
-      className="group w-full p-6 py-4"
-      href={`/profiles/${profile.slug}`}
-      key={profile.id}
-    >
+    <Link className="group w-full p-6 py-4" href={`/profiles/${profile.slug}`}>
       <div className="relative aspect-square w-full rounded-xl shadow-inner">
         <Image
           className="z-10 aspect-square rounded-xl object-cover object-top"

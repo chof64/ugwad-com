@@ -5,7 +5,7 @@ import { sortProfiles } from "@/lib/sort-profiles";
 
 export const getStaticProps = async () => {
   const { data } = await directus.items("profiles").readByQuery({
-    limit: 8,
+    limit: -1,
     fields: ["Name", "position", "department", "portrait", "slug"],
     filter: {
       _and: [{ status: { _eq: "published" } }],
@@ -37,7 +37,7 @@ export default function index({ profiles }) {
       <section className="my-36 mt-16">
         <div className="m-auto grid w-svw-95 max-w-7xl grid-rows-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-none lg:grid-cols-4">
           {profiles.map((profile) => (
-            <ProfileCard key={profile.id} profile={profile} />
+            <ProfileCard key={profile.Name} profile={profile} />
           ))}
         </div>
       </section>
