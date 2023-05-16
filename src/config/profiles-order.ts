@@ -17,5 +17,5 @@ export const profilesOrder = {
     "muse",
     "sentinel",
   ],
-  departments: ["cas", "cba", "ccje", "ccs", "cea", "cot", "cte", "lhs"],
+  departments: ["cas", "cba", "ccje", "ccs", "cea", "cms", "cot", "cte", "lhs"],
 };
